@@ -1,0 +1,39 @@
+
+CHIP MultHalf{
+    IN a[16],b[16];
+    OUT out[16];
+    PARTS:
+    //0 1 2 3 4 5 6 7 8 9 /10 11 12 13 14/ 15  
+    //gledamo predznak 
+    Xor(a = a[15], b = b[15], out = out[15]);  
+    //zbrajamo eksponente
+    Add16(a[0..4] = a[10..14], b[0..4] = b[10..14],  out[0..4] = out[10..14]);  
+    //mantise pomnozimo 
+    Mult (a[0..9] = a[0..9] ,b[0..9] = b[0..9] ,out= mantisa);
+    Or16(a=mantisa,b=false,out[15]=mantisa1);
+    BitShiftL(in=mantisa,out = shiftano);
+    Mux16(a=shiftano, b=mantisa, sel=mantisa1, out=out1);
+    
+    Or16(a=out1,b=false,out[15]=mantisa2);
+    BitShiftL(in=out1,out = shiftano1);
+    Mux16(a=shiftano1, b=out1, sel=mantisa2, out=out2);
+
+    Or16(a=out2,b=false,out[15]=mantisa3);
+    BitShiftL(in=out2,out = shiftano2);
+    Mux16(a=shiftano2, b=out2, sel=mantisa3, out=out3);
+    
+    Or16(a=out3,b=false,out[15]=mantisa4);
+    BitShiftL(in=out3,out = shiftano3);
+    Mux16(a=shiftano3, b=out3, sel=mantisa4, out=out4);
+    
+    Or16(a=out4,b=false,out[15]=mantisa5);
+    BitShiftL(in=out4,out = shiftano4);
+    Mux16(a=shiftano4, b=out4, sel=mantisa5, out=out5);
+
+    Or16(a=out5,b=false,out[15]=mantisa6);
+    BitShiftL(in=out5,out = shiftano5);
+    Mux16(a=shiftano5, b=out5, sel=mantisa6, out=out6);
+
+    Or16(a=false, b=out6, out[6..15]=out[0..9]);
+      
+}
