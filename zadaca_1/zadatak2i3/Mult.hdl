@@ -1,0 +1,172 @@
+CHIP Mult {
+	IN  a[16],b[16];
+	OUT out[16];
+	PARTS:
+    Mux16 (a=false ,b = a,sel =b[0],out=out1);
+    Mux16(a=false,b=a,sel=b[1],out=out2);
+    BitShiftL (in=out2,out=out21);
+
+    Mux16(a=false,b=a,sel=b[2],out=out3);
+    BitShiftL (in=out3,out=out31);
+    BitShiftL (in=out31,out=out32);
+
+    Mux16(a=false,b=a,sel=b[3],out=out4);
+    BitShiftL (in=out4,out=out41);
+    BitShiftL (in=out41,out=out42);
+    BitShiftL (in=out42,out=out43);
+    
+    Mux16(a=false,b=a,sel=b[4],out=out5);
+    BitShiftL (in=out5,out=out51);
+    BitShiftL (in=out51,out=out52);
+    BitShiftL (in=out52,out=out53);
+    BitShiftL (in=out53,out=out54);
+
+    Mux16(a=false,b=a,sel=b[5],out=out6);
+    BitShiftL (in=out6,out=out61);
+    BitShiftL (in=out61,out=out62);
+    BitShiftL (in=out62,out=out63);
+    BitShiftL (in=out63,out=out64);
+    BitShiftL (in=out64,out=out65);
+
+    Mux16(a=false,b=a,sel=b[6],out=out7);
+    BitShiftL (in=out7,out=out71);
+    BitShiftL (in=out71,out=out72);
+    BitShiftL (in=out72,out=out73);
+    BitShiftL (in=out73,out=out74);
+    BitShiftL (in=out74,out=out75);
+    BitShiftL (in=out75,out=out76);
+
+    Mux16(a=false,b=a,sel=b[7],out=out8);
+    BitShiftL (in=out8,out=out81);
+    BitShiftL (in=out81,out=out82);
+    BitShiftL (in=out82,out=out83);
+    BitShiftL (in=out83,out=out84);
+    BitShiftL (in=out84,out=out85);
+    BitShiftL (in=out85,out=out86);
+    BitShiftL (in=out86,out=out87);
+
+    Mux16(a=false,b=a,sel=b[8],out=out9);
+    BitShiftL (in=out9,out=out91);
+    BitShiftL (in=out91,out=out92);
+    BitShiftL (in=out92,out=out93);
+    BitShiftL (in=out93,out=out94);
+    BitShiftL (in=out94,out=out95);
+    BitShiftL (in=out95,out=out96);
+    BitShiftL (in=out96,out=out97);
+    BitShiftL (in=out97,out=out98);
+
+    Mux16(a=false,b=a,sel=b[9],out=out10);
+    BitShiftL (in=out10,out=out101);
+    BitShiftL (in=out101,out=out102);
+    BitShiftL (in=out102,out=out103);
+    BitShiftL (in=out103,out=out104);
+    BitShiftL (in=out104,out=out105);
+    BitShiftL (in=out105,out=out106);
+    BitShiftL (in=out106,out=out107);
+    BitShiftL (in=out107,out=out108);
+    BitShiftL (in=out108,out=out109);
+
+    Mux16(a=false,b=a,sel=b[10],out=out11);
+    BitShiftL (in=out11,out=out111);
+    BitShiftL (in=out111,out=out112);
+    BitShiftL (in=out112,out=out113);
+    BitShiftL (in=out113,out=out114);
+    BitShiftL (in=out114,out=out115);
+    BitShiftL (in=out115,out=out116);
+    BitShiftL (in=out116,out=out117);
+    BitShiftL (in=out117,out=out118);
+    BitShiftL (in=out118,out=out119);
+    BitShiftL (in=out119,out=out120);
+
+    Mux16(a=false,b=a,sel=b[11],out=out12);
+    BitShiftL (in=out12,out=out121);
+    BitShiftL (in=out121,out=out122);
+    BitShiftL (in=out122,out=out123);
+    BitShiftL (in=out123,out=out124);
+    BitShiftL (in=out124,out=out125);
+    BitShiftL (in=out125,out=out126);
+    BitShiftL (in=out126,out=out127);
+    BitShiftL (in=out127,out=out128);
+    BitShiftL (in=out128,out=out129);
+    BitShiftL (in=out129,out=out130);
+    BitShiftL (in=out130,out=out131);
+
+    Mux16(a=false,b=a,sel=b[12],out=out13);
+    BitShiftL (in=out13,out=out132);
+    BitShiftL (in=out132,out=out133);
+    BitShiftL (in=out133,out=out134);
+    BitShiftL (in=out134,out=out135);
+    BitShiftL (in=out135,out=out136);
+    BitShiftL (in=out136,out=out137);
+    BitShiftL (in=out137,out=out138);
+    BitShiftL (in=out138,out=out139);
+    BitShiftL (in=out139,out=out140);
+    BitShiftL (in=out140,out=out141);
+    BitShiftL (in=out141,out=out142);
+    BitShiftL (in=out142,out=out143);
+
+    Mux16(a=false,b=a,sel=b[13],out=out14);
+    BitShiftL (in=out14,out=out144);
+    BitShiftL (in=out144,out=out145);
+    BitShiftL (in=out145,out=out146);
+    BitShiftL (in=out146,out=out147);
+    BitShiftL (in=out147,out=out148);
+    BitShiftL (in=out148,out=out149);
+    BitShiftL (in=out149,out=out150);
+    BitShiftL (in=out150,out=out151);
+    BitShiftL (in=out151,out=out152);
+    BitShiftL (in=out152,out=out153);
+    BitShiftL (in=out153,out=out154);
+    BitShiftL (in=out154,out=out155);
+    BitShiftL (in=out155,out=out156);
+
+    Mux16(a=false,b=a,sel=b[14],out=out15);
+    BitShiftL (in=out15,out=out157);
+    BitShiftL (in=out157,out=out158);
+    BitShiftL (in=out158,out=out159);
+    BitShiftL (in=out159,out=out160);
+    BitShiftL (in=out160,out=out161);
+    BitShiftL (in=out161,out=out162);
+    BitShiftL (in=out162,out=out163);
+    BitShiftL (in=out163,out=out164);
+    BitShiftL (in=out164,out=out165);
+    BitShiftL (in=out165,out=out166);
+    BitShiftL (in=out166,out=out167);
+    BitShiftL (in=out167,out=out168);
+    BitShiftL (in=out168,out=out169);
+    BitShiftL (in=out169,out=out170);
+
+    Mux16(a=false,b=a,sel=b[15],out=out16);
+    BitShiftL (in=out16,out=out171);
+    BitShiftL (in=out171,out=out172);
+    BitShiftL (in=out172,out=out173);
+    BitShiftL (in=out173,out=out174);
+    BitShiftL (in=out174,out=out175);
+    BitShiftL (in=out175,out=out176);
+    BitShiftL (in=out176,out=out177);
+    BitShiftL (in=out177,out=out178);
+    BitShiftL (in=out178,out=out179);
+    BitShiftL (in=out179,out=out180);
+    BitShiftL (in=out180,out=out181);
+    BitShiftL (in=out181,out=out182);
+    BitShiftL (in=out182,out=out183);
+    BitShiftL (in=out183,out=out184);
+    BitShiftL (in=out184,out=out185);
+
+    Add16 (a=out1,b=out21,out=fout1);
+    Add16(a=fout1 ,b=out32 ,out=fout2);
+    Add16(a=fout2 ,b=out43 ,out=fout3); 
+    Add16(a=fout3 ,b=out54 ,out=fout4); 
+    Add16(a=fout4 ,b=out65 ,out=fout5); 
+    Add16(a=fout5 ,b=out76 ,out=fout6); 
+    Add16(a=fout6 ,b=out87 ,out=fout7); 
+    Add16(a=fout7 ,b=out98 ,out=fout8); 
+    Add16(a=fout8 ,b=out109 ,out=fout9); 
+    Add16(a=fout9 ,b=out120 ,out=fout10); 
+    Add16(a=fout10 ,b=out131 ,out=fout11); 
+    Add16(a=fout11 ,b=out143 ,out=fout12); 
+    Add16(a=fout12 ,b=out156 ,out=fout13); 
+    Add16(a=fout13 ,b=out170 ,out=fout14); 
+    Add16(a=fout14 ,b=out185 ,out=out);  
+
+}
