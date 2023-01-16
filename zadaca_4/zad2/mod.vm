@@ -1,0 +1,35 @@
+//algoritam za mod
+//mod(N, D)
+//R = N
+//while R >= D do
+//R = R - D
+
+//pokretanje u VM
+function mod.init 0
+push constant 14
+push constant 2
+call mod.mod 2
+label WHILE
+goto WHILE
+
+
+function mod.mod 2
+push argument 0
+pop local 0        //R=N spremi u local 0
+
+label while
+push local 0
+push argument 1
+lt
+if-goto end
+
+push local 0
+push argument 1
+sub
+pop local 0
+goto while
+
+
+label end
+push local 0
+return 

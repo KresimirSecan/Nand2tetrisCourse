@@ -1,0 +1,44 @@
+function mid 3
+
+push argument 0
+push argument 1
+gt 
+if-goto xGTy
+push argument 1
+push argument 2
+gt
+if-goto yGTz
+push argument 1 
+return
+
+label xGTy
+push argument 0
+push argument 2
+gt
+if-goto xGTz
+push argument 0
+return
+
+label yGTz
+push argument 0
+push argument 2
+gt
+if-goto xGT2z
+push argument 2
+return
+
+label xGTz
+push argument 1 
+push argument 2
+gt
+if-goto yGT2z
+push argument 2
+return
+
+label xGT2z
+push argument 0
+return
+
+label yGT2z
+push argument 1
+return

@@ -1,0 +1,55 @@
+
+//pokretanje u VM
+function mid.init 0
+push constant 10
+push constant 15
+push constant 27
+call mid.mid 3 
+label WHILE
+goto WHILE
+
+//pronademo najveci i onda usporedimo preostala dva i uzmemo veci od njih i on je sigurno onda srednji
+function mid.mid 3
+
+push argument 0
+push argument 1
+gt 
+if-goto usporedba1
+push argument 1
+push argument 2
+gt
+if-goto usporedba2
+push argument 1 
+return
+
+label usporedba1
+push argument 0
+push argument 2
+gt
+if-goto usporedba3
+push argument 0
+return
+
+label usporedba2
+push argument 0
+push argument 2
+gt
+if-goto usporedba4
+push argument 2
+return
+
+label usporedba3
+push argument 1 
+push argument 2
+gt
+if-goto usporedba5
+push argument 2
+return
+
+label usporedba4
+push argument 0
+return
+
+label usporedba5
+push argument 1
+return

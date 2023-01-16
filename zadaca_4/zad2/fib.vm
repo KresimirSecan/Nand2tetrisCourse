@@ -1,0 +1,37 @@
+
+//pokretanje u VM
+function fib.init 0
+push constant 10  //unosimo n (koji broj zelimo izracunati)
+call fib.fib 1 
+label WHILE
+goto WHILE
+
+
+function fib.fib 1
+    push argument 0
+    push constant 2
+    lt   
+    if-goto base 
+
+    // fib(n-2)+fib(n-1)
+
+    // fib(n-2)
+    push argument 0
+    push constant 2
+    sub
+    call fib.fib 1 
+
+    //fib(n-1)
+    push argument 0
+    push constant 1
+    sub
+    call fib.fib 1 
+
+    add 
+    return
+
+// ako je manji od 2 vrati njega samog 
+label base 
+push argument 0
+return
+

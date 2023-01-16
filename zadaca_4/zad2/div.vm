@@ -1,0 +1,51 @@
+//algoritam za div
+//div(N, D)
+//Q = 0
+//R = N
+//while R >= D do
+//Q = Q + 1
+//R = R - D
+//return (Q, R)
+
+//pokretanje u VM
+function div.init 0
+push constant 15
+push constant 2
+call div.div 2
+label WHILE
+goto WHILE
+
+
+function div.div 2
+push constant 0   
+pop local 0       // Q=0 spremljeno u local 0
+push argument 0  
+pop local 1       //R=N spremljeno u local 1
+
+label whilecheck
+push local 1
+push argument 1
+gt
+push local 1
+push argument 1
+eq
+or                 //>=
+if-goto while
+push local 0   //na stack stavi vrijednost u Q
+return
+
+
+label while
+push local 1
+push argument 1
+sub  
+pop local 1 //R=R-D
+
+push local 0
+push constant 1  
+add  
+pop local 0  // //Q=Q+1
+goto whilecheck
+
+
+
