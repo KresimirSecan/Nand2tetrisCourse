@@ -1,0 +1,447 @@
+function vector.new 1
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push constant 0
+pop local 0
+push argument 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
+pop this 0
+push this 0
+call Array.new 1
+pop this 1
+push pointer 0
+return
+label IF_FALSE0
+push constant 1
+pop this 0
+label WHILE_EXP0
+push local 0
+push argument 0
+eq
+not
+not
+if-goto WHILE_END0
+push this 0
+push constant 2
+call Math.multiply 2
+pop this 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 0
+call Array.new 1
+pop this 1
+push pointer 0
+return
+function vector.len 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function vector.set 0
+push argument 0
+pop pointer 0
+push argument 1
+push this 0
+push constant 1
+add
+lt
+push argument 1
+and
+push constant 1
+neg
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 1
+push this 1
+add
+push argument 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto IF_END0
+label IF_FALSE0
+push constant 11
+call String.new 1
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 107
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+label IF_END0
+push constant 0
+return
+function vector.get 0
+push argument 0
+pop pointer 0
+push argument 1
+push this 0
+lt
+push argument 1
+push constant 1
+neg
+gt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 1
+push this 1
+add
+pop pointer 1
+push that 0
+return
+goto IF_END0
+label IF_FALSE0
+push constant 22
+call String.new 1
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 120
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 1
+neg
+return
+label IF_END0
+function vector.print 1
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 0
+eq
+not
+not
+if-goto WHILE_END0
+push local 0
+push this 1
+add
+pop pointer 1
+push that 0
+call Output.printInt 1
+pop temp 0
+push constant 1
+call String.new 1
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function vector.resize 3
+push argument 0
+pop pointer 0
+push argument 1
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+call Array.dispose 1
+pop temp 0
+push constant 1
+pop this 0
+push constant 1
+call Array.new 1
+pop this 1
+push constant 0
+return
+label IF_FALSE0
+push constant 1
+pop local 2
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push argument 1
+eq
+not
+not
+if-goto WHILE_END0
+push local 2
+push constant 2
+call Math.multiply 2
+pop local 2
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 2
+call Array.new 1
+pop local 1
+push constant 0
+pop local 0
+push this 0
+push local 2
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+label WHILE_EXP1
+push local 0
+push this 0
+eq
+not
+not
+if-goto WHILE_END1
+push local 0
+push local 1
+add
+push local 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+goto IF_END1
+label IF_FALSE1
+label WHILE_EXP2
+push local 0
+push local 2
+eq
+not
+not
+if-goto WHILE_END2
+push local 0
+push local 1
+add
+push local 0
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP2
+label WHILE_END2
+label IF_END1
+push this 1
+call Array.dispose 1
+pop temp 0
+push local 1
+pop this 1
+push local 2
+pop this 0
+push constant 0
+return
+function vector.sort 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 0
+push this 0
+call quicksort.qsort 3
+pop temp 0
+push constant 0
+return
+function vector.is_eq 1
+push argument 1
+call vector.len 1
+push argument 0
+call vector.len 1
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push argument 0
+call vector.len 1
+eq
+not
+not
+if-goto WHILE_END0
+push argument 0
+push local 0
+call vector.get 2
+push argument 1
+push local 0
+call vector.get 2
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+not
+return
+function vector.elems 3
+push argument 0
+call vector.len 1
+push argument 1
+call vector.len 1
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push argument 0
+call vector.len 1
+call vector.new 1
+pop local 1
+push argument 1
+call vector.len 1
+call vector.new 1
+pop local 2
+push argument 0
+pop local 1
+push argument 1
+pop local 2
+push local 2
+call vector.sort 1
+pop temp 0
+push local 1
+call vector.sort 1
+pop temp 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push local 1
+call vector.len 1
+eq
+not
+not
+if-goto WHILE_END0
+push local 1
+push local 0
+call vector.get 2
+push local 2
+push local 0
+call vector.get 2
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+not
+return

@@ -1,0 +1,39 @@
+class quicksort{
+    function void qsort (array a , int p , int k ){
+        var int p1;
+        if(p<k){
+            let p1= quicksort.partition(a,p,k);
+            do quicksort.qsort(a,p,p1-1);
+            do quicksort.qsort(a,p1+1,k);
+        }
+        return;
+    }
+    
+    function void swap (array a , int i, int j){
+        var int temp;
+        let temp = a[i];
+        let a[i]=a[j];
+        let a[j]=temp;
+        return;
+    }
+
+    function int partition(int a, int p, int k){
+        var int pivot;
+        var int i;
+        var int j;
+        let pivot = a[k];
+        let i  = p-1;
+        let j = p;
+        while(~(j=k)){
+            if(a[j]<pivot){
+                let i=i+1;
+                do quicksort.swap (a,i,j);
+            }
+            let j=j+1;
+        }
+        do quicksort.swap (a,i+1,k);
+        return(i+1);
+    }
+    
+}
+

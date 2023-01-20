@@ -1,0 +1,91 @@
+class Main
+{
+    function void main()
+    {
+        var vector A, B;
+
+		//konstruktor
+        let A = vector.new(2);
+        let B = vector.new(3);
+
+		//ispis
+		do Output.printString("vector a: ");
+        do A.print();
+		do Output.println();
+		do Output.printString("vector b: ");
+        do B.print();
+		do Output.println();
+
+		//len
+		do Output.printString("duljine: ");
+        do Output.printInt(A.len());
+		do Output.printString(" ");
+        do Output.printInt(B.len());
+        do Output.println();
+		
+		//setter
+		
+        do A.set(0, 10);
+        do A.set(3, 5);
+		do A.set(100, 2);
+        do A.set(-5, 4);
+	
+        do B.set(6, 11);
+        do B.set(4, 51);
+        do B.set(10, 7);
+        do B.set(-25, 1);
+      
+        do Output.printString("vector a: ");
+        do A.print();
+		do Output.println();
+		do Output.printString("vector b: ");
+        do B.print();
+		do Output.println();
+
+		//resize
+        do A.resize(3);
+        do Output.printString("vector a resized: ");
+        do A.print();
+		do Output.println();
+		
+
+		//getter
+        do Output.printInt(A.get(7));
+        do Output.println();
+        do Output.printInt(A.get(10));
+        do Output.println();
+        do Output.printInt(A.get(-7));
+        do Output.println();
+        do Output.printInt(B.get(0));
+        do Output.println();
+        do Output.printInt(B.get(30));
+        do Output.println();
+        do Output.printInt(B.get(4));
+        do Output.println();
+
+		//eq
+		do A.set(3, 5);
+        do A.set(4, 10);
+		do B.set(3, 5);
+        do B.set(4, 10);
+
+        if (vector.is_eq(A, B) = true){
+            do Output.printString("Vektori su jednaki.");
+            do Output.println();
+        }else{
+			do Output.printString("Vektori nisu jednaki.");
+            do Output.println();
+		}
+		
+		//elems
+        if (vector.elems(A, B) = true){
+            do Output.printString("Vektori imaju jednake elemente.");
+            do Output.println();
+        }else{
+			do Output.printString("Vektori nemaju jednake elemente.");
+            do Output.println();
+		}
+		
+        return;
+    }
+}

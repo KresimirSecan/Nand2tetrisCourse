@@ -1,0 +1,50 @@
+class drawfunction{
+    function void drawfunction(){
+        var int i;
+        var int j;
+        var int fx;
+        var Array x;
+        var Array y;
+        var int index;
+        let x = Array.new(64);
+        let y = Array.new(64);
+
+        //kordinatne osi
+        do Screen.drawLine(128,128,384, 128);
+        do Screen.drawLine(256,0,256,255);
+
+        // graf
+        //-32 na y je 256 32 na y je 0
+        //-32 na x je 128 32 na y je 384
+        let  i = -32;
+        let index=0;
+        while((i<32)){
+                let fx = drawfunction.func(i);
+
+                if ( (fx>-33) & (fx<33)){
+                    let x[index]= 256+i;
+                    let y[index]=128-fx;
+                    let index=index+1;
+                    do Screen.drawPixel(256+i,128-fx);
+                }
+                let i =i+1;
+            }
+        let i =0;
+        while(~(i=(index-1))){
+            do Screen.drawLine(x[i],y[i],x[i+1],y[i+1]);
+            let i=i+1;
+        }
+        return;
+        
+    }
+    
+    //definiramo funkciju
+    function int func(int x){
+        var int f;
+        let f= -(x*x) +(4*x) + 3;
+        //let f =x*x*x;
+        //let f = Math.abs(x);
+        //let f = x+30;
+        return f;
+    }
+}

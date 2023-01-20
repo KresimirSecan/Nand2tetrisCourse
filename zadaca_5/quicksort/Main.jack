@@ -1,0 +1,39 @@
+class Main
+{
+	function void main()
+	{
+        var int size;
+        var int i;
+        var int temp;
+        var Array a;
+       
+
+        let size = Keyboard.readInt("Unesite duljinu liste: ");
+		let a = Array.new(size);
+		do Output.println();
+		
+		let i = 0;
+		while (i < size)
+		{
+			let temp = Keyboard.readInt("Unesite broj: ");
+			let a[i] = temp;
+			let i = i + 1;
+		}
+        
+        do quicksort.qsort(a,0,size-1);
+        
+        let i =0;
+        do Output.printString("SORTIRANO:");
+		
+        while (i < size)
+		{  
+			do Output.printInt(a[i]);
+			do Output.printString("  ");
+            let i =i+1;
+		}
+    
+        do a.dispose();
+        return;
+
+    }
+}

@@ -1,0 +1,151 @@
+class vector {
+    field int  capacity;
+    field Array A; 
+
+    //konstruktor
+    constructor vector new (int n){
+        var int i;
+        let  i = 0 ;
+        if (n<0) {
+            let capacity  = 1;
+            let A = Array.new (capacity);
+            return this;  
+        }
+        let capacity = 1 ; 
+        while (~(i = n)){
+            let capacity = capacity*2 ;
+            let  i = i+1;        
+        } 
+        let A = Array.new (capacity);
+        return this; 
+    }
+   
+    
+    //vraca kapacitet
+    method int len (){
+        return capacity;
+    }
+
+    //set
+    method  void set (int k , int v){
+        if (k<(capacity+1) &k>-1){
+            let A[k]=v;
+        }else{
+            do Output.printString("invalid key");
+            do Output.println();
+        }
+        
+        return;
+    }
+    //get
+    method int get (int k){
+        if ((k< (capacity) )&(k>-1)) {
+            return (A[k]);
+        }
+        else{
+            do Output.printString("index not valid error ");
+            return -1 ;
+        }
+    }
+    
+    //ispis
+    method void print (){
+        var int i;
+        let i = 0;
+        while (~(i=capacity)){
+            do Output.printInt(A[i]);
+            do Output.printString(" ");
+            let i = i+1;
+        }
+        return;
+    }
+
+    //resize
+    method void resize (int m){
+        var int i;
+        var Array a1;
+        var int cap2;
+
+        if(m < 0)
+        {
+            do A.dispose();
+            let capacity = 1;
+            let A = Array.new(1);
+            return;
+        }
+
+        let cap2 = 1;
+        let i = 0;
+
+        while (~(i = (m))){
+            let cap2 = cap2*2 ;
+            let  i = i+1;        
+        } 
+
+        let a1 = Array.new (cap2);
+        let i=0;
+        if(capacity < cap2 ){
+            while(~(i=(capacity))){
+                let a1[i]=A[i];   
+                let i =i+1;
+            }
+        }else{
+           while(~(i=(cap2))){
+                let a1[i]=A[i];     
+                let i =i+1;
+            } 
+        }
+        do A.dispose();
+        let A = a1;
+        let capacity=cap2;
+        return;
+    }
+    
+    
+    //sort
+    method void sort (){
+        do quicksort.qsort(A,0,capacity);
+        return ;
+    }
+
+    //eq
+    function bool is_eq (vector a, vector b){
+        var int i;
+        if(~(b.len() = a.len())){
+            return false;
+        }
+        let i = 0;
+        while(~(i=a.len())){
+            if(~(a.get(i)=b.get(i))){
+                return false;
+            }
+            let i =i+1;
+        }
+        return true;
+    }
+
+    //elems
+    function bool elems  (vector a,vector b){
+        var int i;
+        var vector a1,b1;
+        if(~(a.len() = b.len())){
+            return false;
+        }
+        let a1=vector.new (a.len());
+        let b1=vector.new (b.len());
+       
+        let a1 =a ;
+        let b1 = b;
+        do b1.sort();
+        do a1.sort();
+        let i = 0;
+        while(~(i=a1.len())){
+            if(~(a1.get(i)=b1.get(i))){
+                return false;
+            }
+            let i =i+1;
+        }
+        return true;
+     }
+
+}
