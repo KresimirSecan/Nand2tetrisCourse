@@ -1,0 +1,224 @@
+class shaper{
+    //-----POCETNA POZICIJA SVAKOG LIKA-----//
+     function void shaper(Array cshapex,Array cshapey, Array cshapel, Array cshaper,int randoblik){
+        //cube
+        if (randoblik = 0 ){
+            let cshapex[0] =5 ;
+            let cshapey[0] =6 ;
+            let cshapel[0] =0 ;
+            let cshaper[0] =1 ;
+            
+
+            let cshapex[1] = 6;
+            let cshapey[1] = 7;
+            let cshapel[1] = 0;
+            let cshaper[1] = 1;
+
+
+            let cshapex[2] =5 ;
+            let cshapey[2] =6 ;
+            let cshapel[2] =1 ;
+            let cshaper[2] =2 ;
+
+
+            let cshapex[3] = 6;
+            let cshapey[3] = 7;
+            let cshapel[3] = 1;
+            let cshaper[3] = 2;
+
+            return;
+        }
+        //lshape
+        if (randoblik = 1 ){
+            let cshapex[0] =5 ;
+            let cshapey[0] =6 ;
+            let cshapel[0] =0 ;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 5;
+            let cshapey[1] = 6;
+            let cshapel[1] = 1;
+            let cshaper[1] = 2;
+
+            let cshapex[2] =5 ;
+            let cshapey[2] =6 ;
+            let cshapel[2] =2 ;
+            let cshaper[2] =3 ;
+
+            let cshapex[3] = 6;
+            let cshapey[3] = 7;
+            let cshapel[3] = 2;
+            let cshaper[3] = 3;
+            
+            return ;
+        }
+        //jshape
+        if (randoblik = 2 ){
+            let cshapex[0] =6;
+            let cshapey[0] =7 ;
+            let cshapel[0] =0 ;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 6;
+            let cshapey[1] = 7;
+            let cshapel[1] = 1;
+            let cshaper[1] = 2;
+
+            let cshapex[2] =6 ;
+            let cshapey[2] =7 ;
+            let cshapel[2] =2 ;
+            let cshaper[2] =3 ;
+
+            let cshapex[3] = 5;
+            let cshapey[3] = 6;
+            let cshapel[3] = 2;
+            let cshaper[3] = 3;
+        
+            return ;
+        }
+        //ishape
+        if (randoblik = 3 ){
+            let cshapex[0] =6 ;
+            let cshapey[0] =7 ;
+            let cshapel[0] =0 ;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 6;
+            let cshapey[1] = 7;
+            let cshapel[1] = 1;
+            let cshaper[1] = 2;
+
+            let cshapex[2] =6 ;
+            let cshapey[2] =7 ;
+            let cshapel[2] =2 ;
+            let cshaper[2] =3 ;
+
+            let cshapex[3] = 6;
+            let cshapey[3] = 7;
+            let cshapel[3] = 3;
+            let cshaper[3] = 4;
+            
+            return ;
+        }
+        //zshape
+        if (randoblik = 4 ){
+            let cshapex[0] =5 ;
+            let cshapey[0] =6 ;
+            let cshapel[0] =0 ;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 6;
+            let cshapey[1] = 7;
+            let cshapel[1] = 0;
+            let cshaper[1] = 1;
+
+            let cshapex[2] =6 ;
+            let cshapey[2] =7 ;
+            let cshapel[2] =1 ;
+            let cshaper[2] =2 ;
+
+            let cshapex[3] = 7;
+            let cshapey[3] = 8;
+            let cshapel[3] = 1;
+            let cshaper[3] = 2;
+            
+            return ;
+ 
+        }
+        //sshape
+        if (randoblik = 5 ){
+            let cshapex[0] =5;
+            let cshapey[0] =6 ;
+            let cshapel[0] =1;
+            let cshaper[0] =2 ;
+
+            let cshapex[1] = 6;
+            let cshapey[1] = 7;
+            let cshapel[1] = 1;
+            let cshaper[1] = 2;
+
+            let cshapex[2] =6 ;
+            let cshapey[2] =7 ;
+            let cshapel[2] =0 ;
+            let cshaper[2] =1 ;
+
+            let cshapex[3] = 7;
+            let cshapey[3] = 8;
+            let cshapel[3] = 0;
+            let cshaper[3] = 1;
+        
+            return ;
+        }
+        //tshape
+        if (randoblik = 6 ){
+            let cshapex[0] =5;
+            let cshapey[0] =6 ;
+            let cshapel[0] =0;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 6;
+            let cshapey[1] = 7;
+            let cshapel[1] = 0;
+            let cshaper[1] = 1;
+
+            let cshapex[2] =7 ;
+            let cshapey[2] =8 ;
+            let cshapel[2] =0 ;
+            let cshaper[2] =1 ;
+
+            let cshapex[3] = 6;
+            let cshapey[3] = 7;
+            let cshapel[3] = 1;
+            let cshaper[3] = 2;
+            
+            return ;
+        }
+        //ee1
+        if (randoblik = 7){
+            let cshapex[0] =6;
+            let cshapey[0] =7;
+            let cshapel[0] =0;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 5;
+            let cshapey[1] = 6;
+            let cshapel[1] = 1;
+            let cshaper[1] = 2;
+
+            let cshapex[2] =7 ;
+            let cshapey[2] =8 ;
+            let cshapel[2] =1 ;
+            let cshaper[2] =2 ;
+
+            let cshapex[3] = 6;
+            let cshapey[3] = 7;
+            let cshapel[3] = 2;
+            let cshaper[3] = 3;
+        }
+
+        //ee2
+        if (randoblik=8) {
+             let cshapex[0] =5;
+            let cshapey[0] =6;
+            let cshapel[0] =0;
+            let cshaper[0] =1 ;
+
+            let cshapex[1] = 5;
+            let cshapey[1] = 6;
+            let cshapel[1] = 1;
+            let cshaper[1] = 2;
+
+            let cshapex[2] =6 ;
+            let cshapey[2] =7 ;
+            let cshapel[2] =2 ;
+            let cshaper[2] =3;
+
+            let cshapex[3] = 7;
+            let cshapey[3] = 8;
+            let cshapel[3] = 2;
+            let cshaper[3] = 3;
+        }
+        return;
+        
+     }
+}

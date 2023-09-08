@@ -1,0 +1,602 @@
+class tetris{
+    static int  gamedif,score,wait;
+    static Array rows,rand;
+    static tetronim t1,t2;
+    static bool spin;
+
+
+  //-----DESTRUKTOR-----//
+  function void destructor(){
+    do rows.dispose();
+    do rand.dispose();
+    return;
+  }
+
+  //-----"GAME LOOP"-----//
+  function void respawn(int dif,int t){
+      var int i,j ;
+      let i =2;
+      let j = 0;
+      let t1 =  tetronim.tetronim(t);
+      let t2 =  tetronim.tetronim(t);
+      while (spin){
+           if(tetris.end()){
+              do tetris.fall(dif);
+              let t1=t2;
+              let t2 = tetronim.tetronim(t);
+              if(i<t){
+                let i = i+1;
+              }else{
+                let  i =0;
+                do Random.setSeed(rand[j]);
+                if (j<10){
+                  let j=j+1;
+                }else{
+                  let j =0;
+                }
+              }
+            }else{
+                let spin = false;
+                do t1.dtetronim();
+                do t2.dtetronim();
+            }
+            
+      }
+
+      return;
+  }
+  
+
+  /*-----FUNKCIJA PADANJA-----*/
+    function void fall (int dif){
+         var Array cshapey,cshapel;
+         var int randoblik,rot,l;
+
+         //settamo parametre za dani tetronim
+         let cshapey =t1.getcshapey();
+         let cshapel =t1.getcshapel();
+         let rot =t1.getrot();
+         let randoblik =t1.getrandoblik();
+
+         //iduci blok
+         do tetris.nberase();
+         do t2.nextblok();
+
+         //loop padanja
+         while((tetris.stack(2))){
+            
+            //fall 1/2
+            if ((wait=0)){
+                do t1.erase();
+                do t1.down(1);
+                let wait = dif;
+            }
+            
+            //left
+            if ((Keyboard.keyPressed() = 130)){
+                if(tetris.checkmove( cshapey, cshapel,0)){
+                    do t1.erase();
+                    do t1.left();
+                }      
+            }
+
+            //right
+            if ((Keyboard.keyPressed() = 132)){
+                if(tetris.checkmove( cshapey, cshapel,1)){
+                    do t1.erase();
+                    do t1.right();
+                }
+                
+           }
+
+            //down
+            if ((Keyboard.keyPressed() = 32)){
+                if ((tetris.stack(3))&(tetris.stack(2))& (tetris.stack(1))){
+                    do t1.erase();
+                    do t1.down(2);
+                }   
+
+            }
+            
+            //rotate
+            if ((Keyboard.keyPressed() = 133)& (~(randoblik = 0))){
+                if ((tetris.checkrotate())& (tetris.stack(1))){
+                    do t1.erase();
+                    do t1.rotate();
+                    let cshapey =t1.getcshapey();
+                    let cshapel =t1.getcshapel();
+                }
+            }
+            
+            //fall 2/2
+            do t1.draw();
+            do Sys.wait(100);
+            let wait=wait-1;
+
+  
+         }
+         //ciscenje redova/crtanje likova kad padnu
+         do t1.draw();
+         do tetris.highter();
+         do tetris.destro(cshapel[0]);
+         do tetris.destro(cshapel[1]);
+         do tetris.destro(cshapel[2]);
+         do tetris.destro(cshapel[3]);
+         do tetris.gridnet();
+         
+        return;
+    }
+
+
+  //-----SUCELJE IGRE -----//
+
+  //SETTAMO PARAMETRE
+   function void tetrisset(int dif){
+      var int x,y,l,r,i;
+      let score = 0;
+      let wait = dif;
+      let spin = true;
+      let rows = Array.new(204);
+      let i =1;
+      while (i<204){
+          let rows[i] = 0;
+          let i =i+1;
+      }
+
+      let rand = Array.new(10);
+      let rand[0] = 13531;
+      let rand[1] = 25711;
+      let rand[2] = 19312;
+      let rand[3] = 17481;
+      let rand[4] = 27812;
+      let rand[5] = 31541;
+      let rand[6] = 29893;
+      let rand[7] = 23986;
+      let rand[8] = 11131;
+      let rand[9] = 21544;
+      return;
+   }
+
+   //GRAFICKI PRIKAZ IGRE 
+   function void tetrisgui(int gd){
+        let gamedif=gd;
+        //okvir igre
+        do Screen.drawLine(87, 0, 87, 242);
+        do Screen.drawLine(87,242,270,242);
+        do Screen.drawLine(270, 0, 270, 242);
+        
+        //score 
+        do Output.moveCursor(15, 44);
+        do Output.printString("SCORE: ");
+        do Output.printInt(score);
+        
+        //tezina
+        do Output.moveCursor(16, 42);
+        do Output.printString("LEVEL: ");
+        if (gamedif =1){
+            do Output.printString("EASY");
+        }
+        if (gamedif =2){
+            do Output.printString("MEDIUM");
+        }
+        if (gamedif =3){
+          do Output.printString("HARD");
+        }
+        if(gamedif =4){
+          do Output.printString("MYSTERY");
+        }
+
+        //iduci blok okvir
+        do Screen.drawLine(340, 15, 340, 115);
+        do Screen.drawLine(440, 15, 440, 115);
+        do Screen.drawLine(340, 15, 440, 15);
+        do Screen.drawLine(340, 115, 440, 115);
+
+        return;
+   }
+
+   
+     //-----FUNKCIJA BRISE NEXTBLOK PODRUCJE-----//
+    function void nberase(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(350,20 , 430, 110);
+        do Screen.setColor(true);
+        return;
+    }
+
+
+  //-----FUNKCIJA CRTA MREZU-----//
+  function void gridnet(){
+        var int x,y,l,r;
+
+        //po sirini
+        let x =0;
+        let y =1;
+        //po visini
+        let l =0;
+        let r = 1;
+        
+        while (~(y>12)){
+          while(~(r>16)){
+              do Screen.setColor(false);
+              do Screen.drawLine (x*15+88, l*15, x*15+88, r*15);
+              do Screen.drawLine (x*15+88, l*15, y*15+89, l*15);
+              let r=r+1;
+              let l=l+1;
+          }
+          let x=x+1;
+          let y=y+1;
+          let l=0;
+          let r =1;
+        }
+        do Screen.setColor(true);
+        return;
+  }
+  
+
+ 
+
+   //-----FUNKCIJA CISTI PUNE REDOVE----//
+  function void destro(int m){
+    var int i,j;
+    let i=1;
+
+    //provjeri jeli red pun
+    while(i<13){
+        if (rows[12*(m+1)+i] = 0){
+          return ;
+        }
+        let i=i+1;
+    }
+
+    //ako je pun nadodaj score
+    if (gamedif =4){
+      let score =score+2;
+    }else{
+      let score=score+gamedif;
+    }
+
+    let i=1;
+    
+    //obrisi red
+    do Screen.setColor(false);
+    while(i<13){
+        let rows[12*(m+1)+i] = 0;
+        do Screen.drawRectangle((i-1)*15+88,(m)*15, (i)*15+88, (m+1)*15);
+        let i=i+1;
+    }
+    do Screen.setColor(true);
+    do Output.moveCursor(15, 44);
+    do Output.printInt(score);
+    
+    //spusti redovi iznad za jedan nize
+    while (m>0){
+      let i=1;
+      while(i<13){
+          let rows[12*(m+1)+i] = rows[12*(m)+i];
+          let i=i+1;
+      }
+      let m=m-1;
+    }
+
+    //nacrtaj blokove koji su vec u gridu
+    do Screen.clearScreen();
+    do tetris.tetrisgui(gamedif);
+    let i=1;
+    let j =1;
+    while (j<17){
+      if (rows[12*j+i] = 1){
+         do Screen.drawRectangle((i-1)*15+88,(j-1)*15, (i)*15+88, (j)*15);
+      }
+      let i = i+1;
+      if (i=13){
+          let j=j+1;
+          let i=1;
+      }
+    }
+
+    return;
+
+    
+  }
+
+  //-----FUNKCIJA UPDATA GRID-----//
+  function void highter(){
+    var Array y,l;
+    var int i;
+    let y =t1.getcshapey();
+    let l =t1.getcshapel();
+    let i =0;
+    while(i<4){
+        let rows[12*(l[i]+1)+y[i]] = 1;
+        let i=i+1;
+    }
+    return;
+  }
+
+  //-----FUNKCIJA PROVJERAVA VISINU DO KOJE BLOK PADA-----//
+  function bool stack(int p){
+    var Array y,l;
+    let y =t1.getcshapey();
+    let l =t1.getcshapel();
+
+    if ( ((12*(l[0]+p)+y[0])>204) | ((12*(l[1]+p)+y[1])>204) | ((12*(l[2]+p)+y[2])>204) | ((12*(l[3]+p)+y[3])>204)  ){
+      return false;
+    }
+    
+    if(( rows[12*(l[0]+p)+y[0]] =0) & ( rows[12*(l[1]+p)+y[1]] =0) & ( rows[12*(l[2]+p)+y[2]] =0) & ( rows[12*(l[3]+p)+y[3]] =0)){
+        return true;
+    }else{
+        return false;
+    }   
+
+    
+  }
+
+   //-----FUNKCIJA PROVJERAVA DESNO/LIJEVO-----//
+  function bool checkmove(Array y , Array l , int lr){
+      var int i1,i2,i3,i4;
+      if (lr=1){
+        let i1= y[0]+1;
+        let i2= y[1]+1;
+        let i3= y[2]+1;
+        let i4= y[3]+1;
+      }else{
+        let i1= y[0]-1;
+        let i2= y[1]-1;
+        let i3= y[2]-1;
+        let i4= y[3]-1;  
+      }
+      if ((rows[12*(l[0]+1)+i1] =0) & (rows[12*(l[1]+1)+i2] =0) & (rows[12*(l[2]+1)+i3] =0) & (rows[12*(l[3]+1)+i4] =0)){
+          return true;
+        }else{
+          return false;
+        }
+  }
+
+ //-----FUNKCIJA PROVJERAVA MOGUCNOST ROTACIJE-----//
+  function bool checkrotate( ){
+        var Array cshapey,cshapel,cshapex,cshaper;
+        var int randoblik,rot;
+        var int i1,i2,i3,i4;
+        var int h1,h2,h3,h4;
+
+        let cshapey =t1.getcshapey();
+        let cshapel =t1.getcshapel();
+        let cshapex =t1.getcshapey();
+        let cshaper =t1.getcshapel();
+        let rot =t1.getrot();
+        let randoblik =t1.getrandoblik();
+
+
+        
+
+        //lshape
+        if (randoblik = 1) {
+            if (rot =0 ){
+              let i1= cshapey[0]+2;
+              let i2= cshapey[1]+2;
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0]+2;
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3];
+            }
+            if (rot = 2){
+              let i1= cshapey[0]+1;
+              let i2= cshapey[1];
+              let i3= cshapey[2]+3;
+              let i4= cshapey[3];
+              let h1= cshapel[0]+1;
+              let h2= cshapel[1];
+              let h3= cshapel[2]+1;
+              let h4= cshapel[3];
+            }
+        }
+
+        //jshape
+        if (randoblik = 2) {
+            if (rot =0 ){
+              let i1= cshapey[0]-1;
+              let i2= cshapey[1];
+              let i3= cshapey[2]+1;
+              let i4= cshapey[3]+2;
+              let h1= cshapel[0]+1;
+              let h2= cshapel[1];
+              let h3= cshapel[2]-1;
+              let h4= cshapel[3];
+            }
+            if (rot = 2){
+              let i1= cshapey[0]+1;
+              let i2= cshapey[1];
+              let i3= cshapey[2]+1;
+              let i4= cshapey[3];
+              let h1= cshapel[0]+2;
+              let h2= cshapel[1];
+              let h3= cshapel[2]+2;
+              let h4= cshapel[3];  
+            }
+        }
+
+        //ishape
+        if (randoblik =3){
+            if (rot =0 ){
+              let i1= cshapey[0];
+              let i2= cshapey[1]+1;
+              let i3= cshapey[2]+2;
+              let i4= cshapey[3]+3;
+              let h1= cshapel[0];
+              let h2= cshapel[1]-1;
+              let h3= cshapel[2]-2;
+              let h4= cshapel[3]-3;
+            }
+        }
+
+        //zshape 
+        if (randoblik =4){
+            if (rot =0 ){
+              let i1= cshapey[0]+2;
+              let i2= cshapey[1];
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0];
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3]-2;
+            }
+        }
+
+        //sshape
+        if (randoblik = 5) {
+            if (rot =0 ){
+              let i1= cshapey[0];
+              let i2= cshapey[1];
+              let i3= cshapey[2];
+              let i4= cshapey[3]-2;
+              let h1= cshapel[0]-2;
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3];
+            }else{
+              let i1= cshapey[0]+2;
+              let i2= cshapey[1];
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0];
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3]-2;
+            }
+        }
+
+        //tshape
+        if (randoblik = 6) {
+            if (rot =0 ){
+              let i1= cshapey[0]+1;
+              let i2= cshapey[1];
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0]-1;
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3];
+            }
+            if (rot = 2){
+              let i1= cshapey[0];
+              let i2= cshapey[1];
+              let i3= cshapey[2]-1;
+              let i4= cshapey[3];
+              let h1= cshapel[0]-1;
+              let h2= cshapel[1];
+              let h3= cshapel[2]-2;
+              let h4= cshapel[3];
+            }
+        }
+
+        //ee2
+        if (randoblik = 8) {
+           if (rot =0 ){
+              let i1= cshapey[0]+3;
+              let i2= cshapey[1]+3;
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0];
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3];
+            }
+            if (rot =2 ){
+              let i1= cshapey[0]-3;
+              let i2= cshapey[1]-3;
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0];
+              let h2= cshapel[1];
+              let h3= cshapel[2];
+              let h4= cshapel[3];
+            }
+            if (rot =3 ){
+              let i1= cshapey[0];
+              let i2= cshapey[1];
+              let i3= cshapey[2];
+              let i4= cshapey[3];
+              let h1= cshapel[0];
+              let h2= cshapel[1];
+              let h3= cshapel[2]+3;
+              let h4= cshapel[3]+3;
+            }
+        }
+
+
+        if ((rows[12*(h1+1)+i1] =0) & (rows[12*(h2+1)+i2] =0) & (rows[12*(h3+1)+i3] =0) & (rows[12*(h4+1)+i4] =0)){
+          return true;
+        }else{
+          return false;
+        }
+    }
+
+   
+   //-----FUNKCIJA PROVJERAVA DODIR S VRHOM-----//
+  function  bool end(){
+    var int i;
+    let i = 0;
+   while(i<13){
+        if (rows[12+i] = 1){
+          return false;
+        }
+        let i=i+1;
+    }
+    return true ;
+  }
+
+  //-----GAMEOVER PROZOR-----//
+  function void endgame(){
+     do Screen.clearScreen();
+     do Screen.drawLine(295, 100, 295, 150);
+     do Screen.drawLine(195, 100, 195, 150);
+     do Screen.drawLine(195, 100, 295, 100);
+     do Screen.drawLine(195, 150, 295, 150);
+     do Output.moveCursor(10, 26);
+     do Output.printString("GAME OVER");
+     do Output.moveCursor(11,28);
+     if (gamedif =1){
+        do Output.printString("EASY");
+      } 
+      if (gamedif =2){
+          do Output.moveCursor(11,27);
+          do Output.printString("MEDIUM");
+      }
+      if (gamedif =3){
+          
+          do Output.printString("HARD");
+      }
+      if (gamedif =4){
+          do Output.moveCursor(11,27);
+          do Output.printString("MYSTERY");
+      }
+      do Output.moveCursor(12, 26);
+      do Output.printString("SCORE: ");
+      do Output.printInt(score);
+      return;
+  }
+
+
+  //pokazuje grid za provjeru
+  function void c(){
+        var int i ,j;
+        let i=1;
+        let j =1;
+        while (j<17){
+            do Output.moveCursor(j, i+40);
+            do Output.printInt(rows[12*j+i]);
+            let i = i+1;
+            if (i=13){
+              let j=j+1;
+              let i=1;
+            }
+        }
+      return;
+  }       
+  
+}
